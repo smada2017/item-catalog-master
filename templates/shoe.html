@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+</head>
+
+<body>
+
+  <div class = 'pane'>
+  <h1>{{shoeStore.name}}</h1>
+{% if items !=[] %}
+<a href = '{{url_for('newShoeItem', shoeStore_id = shoeStore.id)}}'>Create New Item</a>
+    <div>
+    {% for i in items %}
+      <p>{{i.name}}</p>
+      <p>{{i.description}}</p>
+      <p>{{i.price}}</p>
+      <a href='{{url_for('editShoeItem', shoeStore_id=shoeStore.id, shoe_id=i.id)}}'>Edit</a>
+      </br>
+      <a href='{{url_for('deleteShoeItem', shoeStore_id=shoeStore.id, shoe_id=i.id)}}'>Delete</a>
+      </br>
+    {% endfor %}
+    </div>
+{% else %}
+<p> You currently have no shoe items. <p>
+  <a href = '{{url_for('newShoeItem', shoeStore_id = shoeStore.id)}}'>Create New Item</a>
+{% endif %}
+
+</div>
+</body>
+</html>
